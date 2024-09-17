@@ -1,0 +1,55 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}Product Detail{% endblock %}
+
+{% block content %}
+ <h1>{{ product.title }}</h1>
+    <p><strong>Description:</strong> {{ product.description }}</p>
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+    <p><strong>Discount Percentage:</strong> {{ product.discountPercentage }}%</p>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+    <p><strong>SKU:</strong> {{ product.sku }}</p>
+    <p><strong>Weight:</strong> {{ product.weight }}</p>
+    <p><strong>Warranty Information:</strong> {{ product.get_warrantyInformation_display }}</p>
+    <p><strong>Shipping Information:</strong> {{ product.get_shippingInformation_display }}</p>
+    <p><strong>Availability Status:</strong> {{ product.get_availabilityStatus_display }}</p>
+    <p><strong>Return Policy:</strong> {{ product.get_returnPolicy_display }}</p>
+    <p><strong>Minimum Order Quantity:</strong> {{ product.minimumOrderQuantity }}</p>
+    <p><strong>Thumbnail:</strong> <img src="{{ product.thumbnail }}" alt="{{ product.title }} thumbnail"></p>
+    <p><strong>Width:</strong> {{ product.width }}</p>
+    <p><strong>Height:</strong> {{ product.height }}</p>
+    <p><strong>Depth:</strong> {{ product.depth }}</p>
+    <p><strong>Created At:</strong> {{ product.created_at }}</p>
+    <p><strong>Updated At:</strong> {{ product.updated_at }}</p>
+    <p><strong>Barcode:</strong> {{ product.barcode }}</p>
+    <p><strong>QR Code:</strong> <img src="{{ product.qrCode }}" alt="{{ product.title }} QR Code"></p>
+    <p><strong>Category:</strong> {{ product.category.name }}</p>
+    <p><strong>Brand:</strong> {{ product.brand.name }}</p>
+
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in product.reviews.all %}
+        <li>
+            <p><strong>Rating:</strong> {{ review.rating }}</p>
+            <p><strong>Comment:</strong> {{ review.comment }}</p>
+            <p><strong>Date:</strong> {{ review.date }}</p>
+            <p><strong>Reviewer Name:</strong> {{ review.reviewerName }}</p>
+            <p><strong>Reviewer Email:</strong> {{ review.reviewerEmail }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Tags</h2>
+    <ul>
+        {% for tag in product.tags.all %}
+        <li>{{ tag.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Product Images</h2>
+    <ul>
+        {% for image in product.images.all %}
+        <li><img src="{{ image.imagePath }}" alt="{{ product.title }} Image"></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

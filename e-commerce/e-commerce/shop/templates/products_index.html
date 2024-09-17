@@ -1,0 +1,29 @@
+{% extends 'shared/_layout.html' %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h1>Product List</h1>
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    {% for product in products %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ product.thumbnail }}" class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <hr/>
+                <p class="card-text"><strong>Category:</strong> {{ product.category.name }}</p>
+                <p class="card-text"><strong>Brand:</strong> {{ product.brand.name }}</p>
+                <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                <small class="text-muted">
+                    Tags:
+                    {% for tag in product.tags.all %}
+                        <span class="badge text-bg-secondary">{{ tag.name }}</span>
+                    {% endfor %}
+                </small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
